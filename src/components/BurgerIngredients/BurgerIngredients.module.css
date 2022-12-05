@@ -1,17 +1,20 @@
 .section {
   padding-top: 40px;
   max-width: 600px;
+  width: 100%;
 }
 
 .tabHolder {
   display: flex;
   flex-direction: row;
+  padding-top: 20px;
 }
 
 .ingredients {
   overflow: hidden;
   overflow-y: scroll;
   max-height: 700px;
+  padding-top: 40px;
 }
 
 /*Скроллбар*/
@@ -31,10 +34,11 @@
   grid-template-columns: repeat(2, 1fr);
   margin: 0;
   padding: 0;
+  justify-items: center;
 }
 
 .listItem {
-
+  padding-top: 24px;
 }
 
 .counter {
