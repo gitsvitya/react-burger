@@ -1,43 +1,61 @@
 .section {
   max-width: 600px;
   width: 100%;
+  padding-top: 100px;
 }
 
 .list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   overflow-y: scroll;
+  max-height: 670px;
+  list-style-type: none;
+  gap: 16px;
 }
 
 .list::-webkit-scrollbar {
   width: 8px;
 }
+
 .list::-webkit-scrollbar-track {
   background: #2F2F37;
 }
+
 .list::-webkit-scrollbar-thumb {
   background-color: #8585AD;
 }
 
 .listBorder {
-
+  align-self: flex-end;
+  max-width: 544px;
+  width: 100%;
 }
 
-.item {
-
-}
-
-.dragIcon {
-
+.listItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  align-content: end;
+  max-width: 580px;
+  width: 100%;
 }
 
 .orderResultContainer {
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 41.5px;
+  justify-content: right;
+  padding: 28px 16px 0 0;
 }
 
 .priceSum {
-
-}
-
-.currencyIcon {
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
 }
