@@ -7,8 +7,10 @@ import listBorderPic from '../../images/illustration.svg'
 function BurgerConstructor() {
   return (
     <section className={bcStyles.section}>
-      <ul className={bcStyles.list}>
-        <li className={bcStyles.listBorder}>
+
+      <div className={bcStyles.bunConstructorList}>
+
+        <div className={bcStyles.listBorder}>
           <ConstructorElement
             text='Краторная булка N-200i (верх)'
             thumbnail={listBorderPic}
@@ -16,26 +18,28 @@ function BurgerConstructor() {
             type='top'
             isLocked={true}
           />
-        </li>
+        </div>
 
-        {
-          data.map((ingredient) => {
-            if (ingredient.type !== 'bun') {
-              return (
-                <li className={bcStyles.listItem} key={ingredient._id}>
-                  <DragIcon type='primary'/>
-                  <ConstructorElement
-                    text={ingredient.name}
-                    thumbnail={ingredient.image_mobile}
-                    price={ingredient.price}
-                  />
-                </li>
-              )
-            }
-          })
-        }
+        <ul className={bcStyles.ingredientsList}>
+          {
+            data.map((ingredient) => {
+              if (ingredient.type !== 'bun') {
+                return (
+                  <li className={bcStyles.listItem} key={ingredient._id}>
+                    <DragIcon type='primary'/>
+                    <ConstructorElement
+                      text={ingredient.name}
+                      thumbnail={ingredient.image_mobile}
+                      price={ingredient.price}
+                    />
+                  </li>
+                )
+              }
+            })
+          }
+        </ul>
 
-        <li className={bcStyles.listBorder}>
+        <div className={bcStyles.listBorder}>
           <ConstructorElement
             text='Краторная булка N-200i (низ)'
             thumbnail={listBorderPic}
@@ -43,8 +47,9 @@ function BurgerConstructor() {
             type='bottom'
             isLocked={true}
           />
-        </li>
-      </ul>
+        </div>
+
+      </div>
 
       <div className={bcStyles.orderResultContainer}>
         <div className={bcStyles.priceSum}>

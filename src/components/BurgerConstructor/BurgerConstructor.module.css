@@ -4,33 +4,31 @@
   padding-top: 100px;
 }
 
-.list {
-  padding: 0;
+.ingredientsList {
+  padding: 16px 0 0 0;
   margin: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   overflow-y: scroll;
-  max-height: 670px;
+  max-height: 480px;
   list-style-type: none;
-  gap: 16px;
 }
 
-.list::-webkit-scrollbar {
+.ingredientsList::-webkit-scrollbar {
   width: 8px;
 }
 
-.list::-webkit-scrollbar-track {
+.ingredientsList::-webkit-scrollbar-track {
   background: #2F2F37;
 }
 
-.list::-webkit-scrollbar-thumb {
+.ingredientsList::-webkit-scrollbar-thumb {
   background-color: #8585AD;
 }
 
 .listBorder {
-  align-self: flex-end;
-  max-width: 544px;
+  padding-left: 45px;
   width: 100%;
 }
 
@@ -38,10 +36,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: right;
-  align-content: end;
-  max-width: 580px;
+  justify-content: center;
+  padding-bottom: 16px;
+  gap: 10px;
   width: 100%;
+
 }
 
 .orderResultContainer {
@@ -50,7 +49,7 @@
   align-items: center;
   gap: 41.5px;
   justify-content: right;
-  padding: 28px 16px 0 0;
+  padding: 38px 16px 0 0;
 }
 
 .priceSum {
@@ -58,4 +57,9 @@
   flex-direction: row;
   align-items: center;
   gap: 18px;
+}
+
+.bunConstructorList {
+  display: flex;
+  flex-direction: column;
 }
