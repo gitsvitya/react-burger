@@ -4,8 +4,29 @@ import {ConstructorElement, Button, DragIcon, CurrencyIcon} from '@ya.praktikum/
 import listBorderPic from '../../images/illustration.svg'
 import PropTypes from 'prop-types';
 import apiPropTypes from "../../utils/propTypes.js";
+import Modal from '../Modal/Modal.jsx';
+import OrderDetails from '../OrderDetails/OrderDetails.jsx';
 
-function BurgerConstructor( {data} ) {
+
+// Создаем функциональную компоненту BurgerConstructor, которая отвечает за формирование заказа бургера
+// исходя из выбранных ингредиентов, а также позволяет инициировать создание заказа при нажатии на
+// кнопку 'Оформить заказ'. Принимает на вход данные об ингредиентах из API.
+function BurgerConstructor({data}) {
+
+  // Создаем хук для проверки статуса модального окна. При нажатии на кнопку "Оформить заказ" рендерим
+  // модальное окно с данными из OrderDetails
+
+  const [OrderDetailsOpened, openOrderDetails] = React.useState(false);
+
+  function openModal() {
+    openOrderDetails(true);
+  }
+
+  function closeModal() {
+    openOrderDetails(false);
+  }
+
+  // Рендерим контент из 2 булок и ингридиентов из API
   return (
     <section className={bcStyles.section}>
 
@@ -57,12 +78,19 @@ function BurgerConstructor( {data} ) {
           <p className='text text_type_digits-medium'>610</p>
           <CurrencyIcon type='primary'/>
         </div>
-        <Button type='primary' size='large' htmlType='button'>Оформить заказ</Button>
+        <Button type='primary' size='large' htmlType='button' onClick={openModal}>Оформить заказ</Button>
       </div>
+
+      {OrderDetailsOpened &&
+        <Modal closeModal={closeModal}>
+          <OrderDetails closeModal={closeModal}/>
+        </Modal>
+      }
     </section>
   )
 }
 
+// Проверяем данные, принимаемые BurgerConstructor, на соответствие форматам
 BurgerConstructor.propTypes = {
   data: PropTypes.arrayOf(apiPropTypes).isRequired,
 }
