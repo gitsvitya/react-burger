@@ -1,10 +1,11 @@
 import React from 'react';
 import bcStyles from './BurgerConstructor.module.css';
 import {ConstructorElement, Button, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import data from '../../utils/data.js';
 import listBorderPic from '../../images/illustration.svg'
+import PropTypes from 'prop-types';
+import apiPropTypes from "../../utils/propTypes.js";
 
-function BurgerConstructor() {
+function BurgerConstructor( {data} ) {
   return (
     <section className={bcStyles.section}>
 
@@ -60,6 +61,10 @@ function BurgerConstructor() {
       </div>
     </section>
   )
+}
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(apiPropTypes).isRequired,
 }
 
 export default BurgerConstructor

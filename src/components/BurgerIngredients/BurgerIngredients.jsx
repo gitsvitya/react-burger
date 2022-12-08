@@ -1,9 +1,10 @@
 import React from 'react';
 import biStyles from './BurgerIngredients.module.css';
 import {Tab, Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import data from '../../utils/data.js';
+import PropTypes from "prop-types";
+import apiPropTypes from "../../utils/propTypes";
 
-function BurgerIngredients() {
+function BurgerIngredients( {data} ) {
 
   const [current, setCurrent] = React.useState('one')
 
@@ -84,6 +85,10 @@ function BurgerIngredients() {
       </div>
     </section>
   )
+}
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.arrayOf(apiPropTypes).isRequired,
 }
 
 export default BurgerIngredients;
