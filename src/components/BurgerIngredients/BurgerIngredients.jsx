@@ -1,6 +1,6 @@
 import React from 'react';
 import biStyles from './BurgerIngredients.module.css';
-import {Tab, Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import apiPropTypes from '../../utils/propTypes.js';
 import IngredientItemRender from '../IngredientItemRender/IngredientItemRender.jsx'
