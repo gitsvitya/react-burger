@@ -2,10 +2,11 @@
   max-width: 600px;
   width: 100%;
   padding-top: 100px;
+  padding-right: 80px;
 }
 
 .ingredientsList {
-  padding: 16px 0 0 0;
+  padding-inline-start: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -37,7 +38,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding-bottom: 16px;
   gap: 10px;
   width: 100%;
 
@@ -49,7 +49,6 @@
   align-items: center;
   gap: 41.5px;
   justify-content: right;
-  padding: 38px 16px 0 0;
 }
 
 .priceSum {

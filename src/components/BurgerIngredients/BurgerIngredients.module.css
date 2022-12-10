@@ -1,24 +1,19 @@
 .section {
-  padding-top: 40px;
   max-width: 600px;
   max-height: 912px;
   width: 100%;
+  padding-left: 85px;
 }
 
 .tabHolder {
   display: flex;
   flex-direction: row;
-  padding-top: 20px;
 }
 
 .ingredients {
   overflow: hidden;
   overflow-y: scroll;
   max-height: 750px;
-}
-
-.ingredientsParts {
-  padding: 40px 0 22px 0;
 }
 
 /*Скроллбар*/
@@ -39,28 +34,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin: 0;
-  padding: 24px 0 0 0;
+  padding-inline-start: 0;
   justify-items: center;
   row-gap: 30px;
-  /*max-width: 240px;*/
 }
 
-.listItem {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-}
 
-.priceContainer {
-  display: flex;
-  flex-direction: row;
-  padding: 9px;
-  gap: 9px;
-}
 
-.counter {
-  margin-right: 6px;
-}
+
+
 

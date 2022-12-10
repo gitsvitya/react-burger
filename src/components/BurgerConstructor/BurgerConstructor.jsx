@@ -3,7 +3,7 @@ import bcStyles from './BurgerConstructor.module.css';
 import {ConstructorElement, Button, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import listBorderPic from '../../images/illustration.svg'
 import PropTypes from 'prop-types';
-import apiPropTypes from "../../utils/propTypes.js";
+import apiPropTypes from '../../utils/propTypes.js';
 import Modal from '../Modal/Modal.jsx';
 import OrderDetails from '../OrderDetails/OrderDetails.jsx';
 
@@ -13,7 +13,7 @@ import OrderDetails from '../OrderDetails/OrderDetails.jsx';
 // кнопку 'Оформить заказ'. Принимает на вход данные об ингредиентах из API.
 function BurgerConstructor({data}) {
 
-  // Создаем хук для проверки статуса модального окна. При нажатии на кнопку "Оформить заказ" рендерим
+  // Создаем хук для проверки статуса модального окна. При нажатии на кнопку 'Оформить заказ' рендерим
   // модальное окно с данными из OrderDetails
 
   const [OrderDetailsOpened, openOrderDetails] = React.useState(false);
@@ -42,12 +42,12 @@ function BurgerConstructor({data}) {
           />
         </div>
 
-        <ul className={bcStyles.ingredientsList}>
+        <ul className={`${bcStyles.ingredientsList} pt-4 pb-0 pr-0 pl-0`}>
           {
             data.map((ingredient) => {
               if (ingredient.type !== 'bun') {
                 return (
-                  <li className={bcStyles.listItem} key={ingredient._id}>
+                  <li className={`${bcStyles.listItem} pb-4`} key={ingredient._id}>
                     <DragIcon type='primary'/>
                     <ConstructorElement
                       text={ingredient.name}
@@ -73,7 +73,7 @@ function BurgerConstructor({data}) {
 
       </div>
 
-      <div className={bcStyles.orderResultContainer}>
+      <div className={`${bcStyles.orderResultContainer} pt-10 pr-4`}>
         <div className={bcStyles.priceSum}>
           <p className='text text_type_digits-medium'>610</p>
           <CurrencyIcon type='primary'/>

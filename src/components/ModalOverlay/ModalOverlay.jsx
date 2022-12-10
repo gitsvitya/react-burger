@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // Создаем функцию ModalOverlay, которая будет рендерить блок, имитирующий задний фон.
 // Принимает на вход также хук для состояни закрытия себя и окна Modal (closeModal).
-const ModalOverlay = ({ onClick }) => {
+const ModalOverlay = ({onClick}) => {
   return (
     <div className={modOverStyles.modalOverlay} onClick={onClick}></div>
   )

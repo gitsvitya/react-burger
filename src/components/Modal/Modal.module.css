@@ -1,6 +1,6 @@
 .modalWindow {
   width: 720px;
-  height: 718px;
+  height: fit-content;
   box-sizing: border-box;
   background-color: #1C1C21;
   border: 1px solid rgba(76, 76, 255, 0.2);
