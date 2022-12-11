@@ -30,7 +30,7 @@ function BurgerIngredients({data}) {
             {data.map((ingredient) => {
               if (ingredient.type === 'bun') {
                 return (
-                  <IngredientItemRender data={ingredient}/>
+                  <IngredientItemRender data={ingredient} key={ingredient._id}/>
                 )
               }
             })}
@@ -42,7 +42,7 @@ function BurgerIngredients({data}) {
             {data.map((ingredient) => {
               if (ingredient.type === 'sauce') {
                 return (
-                  <IngredientItemRender data={ingredient}/>
+                  <IngredientItemRender data={ingredient} key={ingredient._id}/>
                 )
               }
             })}
@@ -54,7 +54,7 @@ function BurgerIngredients({data}) {
             {data.map((ingredient) => {
               if (ingredient.type === 'main') {
                 return (
-                  <IngredientItemRender data={ingredient}/>
+                  <IngredientItemRender data={ingredient} key={ingredient._id}/>
                 )
               }
             })}
