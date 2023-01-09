@@ -3,12 +3,15 @@ import biStyles from './BurgerIngredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import apiPropTypes from '../../utils/propTypes.js';
-import IngredientItemRender from '../IngredientItemRender/IngredientItemRender.jsx'
+import IngredientItemRender from '../IngredientItemRender/IngredientItemRender.jsx';
+import {BurgerIngredientsContext} from "../../services/burgerIngredientsContext";
 
 
-function BurgerIngredients({data}) {
+function BurgerIngredients() {
 
   const [current, setCurrent] = React.useState('one')
+
+  const dataFromApi = React.useContext(BurgerIngredientsContext);
 
   const handleScroll = (id) => {
     setCurrent(id);
@@ -27,7 +30,7 @@ function BurgerIngredients({data}) {
         <div className={`pt-10 pb-5`}>
           <h2 className='text text_type_main-medium' id='one'>Булки</h2>
           <ul className={`${biStyles.list} pt-6`}>
-            {data.map((ingredient) => {
+            {dataFromApi.map((ingredient) => {
               if (ingredient.type === 'bun') {
                 return (
                   <IngredientItemRender data={ingredient} key={ingredient._id}/>
@@ -39,7 +42,7 @@ function BurgerIngredients({data}) {
         <div className={`pt-10 pb-5`}>
           <h2 className='text text_type_main-medium' id='two'>Соусы</h2>
           <ul className={`${biStyles.list} pt-6`}>
-            {data.map((ingredient) => {
+            {dataFromApi.map((ingredient) => {
               if (ingredient.type === 'sauce') {
                 return (
                   <IngredientItemRender data={ingredient} key={ingredient._id}/>
@@ -51,7 +54,7 @@ function BurgerIngredients({data}) {
         <div className={`pt-10 pb-5`}>
           <h2 className='text text_type_main-medium' id='three'>Начинки</h2>
           <ul className={`${biStyles.list} pt-6`}>
-            {data.map((ingredient) => {
+            {dataFromApi.map((ingredient) => {
               if (ingredient.type === 'main') {
                 return (
                   <IngredientItemRender data={ingredient} key={ingredient._id}/>
@@ -65,8 +68,8 @@ function BurgerIngredients({data}) {
   )
 }
 
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(apiPropTypes).isRequired,
-}
+// BurgerIngredients.propTypes = {
+//   data: PropTypes.arrayOf(apiPropTypes).isRequired,
+// }
 
 export default BurgerIngredients;

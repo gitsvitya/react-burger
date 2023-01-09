@@ -6,17 +6,20 @@ import PropTypes from 'prop-types';
 import apiPropTypes from '../../utils/propTypes.js';
 import Modal from '../Modal/Modal.jsx';
 import OrderDetails from '../OrderDetails/OrderDetails.jsx';
+import {BurgerConstructorContext} from "../../services/burgerCunstructorContext";
 
 
 // Создаем функциональную компоненту BurgerConstructor, которая отвечает за формирование заказа бургера
 // исходя из выбранных ингредиентов, а также позволяет инициировать создание заказа при нажатии на
 // кнопку 'Оформить заказ'. Принимает на вход данные об ингредиентах из API.
-function BurgerConstructor({data}) {
+function BurgerConstructor() {
 
   // Создаем хук для проверки статуса модального окна. При нажатии на кнопку 'Оформить заказ' рендерим
   // модальное окно с данными из OrderDetails
 
   const [OrderDetailsOpened, openOrderDetails] = React.useState(false);
+
+  const dataFromApi = React.useContext(BurgerConstructorContext);
 
   function openModal() {
     openOrderDetails(true);
@@ -44,7 +47,7 @@ function BurgerConstructor({data}) {
 
         <ul className={`${bcStyles.ingredientsList} pt-4 pb-0 pr-0 pl-0`}>
           {
-            data.map((ingredient) => {
+            dataFromApi.map((ingredient) => {
               if (ingredient.type !== 'bun') {
                 return (
                   <li className={`${bcStyles.listItem} pb-4`} key={ingredient._id}>
@@ -91,8 +94,8 @@ function BurgerConstructor({data}) {
 }
 
 // Проверяем данные, принимаемые BurgerConstructor, на соответствие форматам
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(apiPropTypes).isRequired,
-}
+// BurgerConstructor.propTypes = {
+//   data: PropTypes.arrayOf(apiPropTypes).isRequired,
+// }
 
 export default BurgerConstructor

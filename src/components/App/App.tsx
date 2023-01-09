@@ -3,24 +3,16 @@ import appStyles from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader.jsx';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
-
-const api = 'https://norma.nomoreparties.space/api/ingredients';
+import { BurgerConstructorContext } from "../../services/burgerCunstructorContext";
+import { BurgerIngredientsContext } from "../../services/burgerIngredientsContext";
+import {getIngredientsData} from "../../utils/api";
 
 function App() {
 
-  const [data, setData] = React.useState([]);
+  const [dataFromApi, setData] = React.useState([]);
+
   React.useEffect(() => {
-      fetch(api)
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject('Ошибка: ${res.status}')
-        })
-        .then(json => setData(json.data))
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`)
-        })
+    getIngredientsData(setData);
     }, []
   )
 
@@ -28,8 +20,12 @@ function App() {
     <div className={appStyles.page}>
       <AppHeader/>
       <main className={appStyles.main}>
-        <BurgerIngredients data={data}/>
-        <BurgerConstructor data={data}/>
+        <BurgerIngredientsContext.Provider value={ dataFromApi }>
+            <BurgerIngredients />
+        </BurgerIngredientsContext.Provider>
+        <BurgerConstructorContext.Provider value={ dataFromApi }>
+            <BurgerConstructor />
+        </BurgerConstructorContext.Provider>
       </main>
     </div>
   );
