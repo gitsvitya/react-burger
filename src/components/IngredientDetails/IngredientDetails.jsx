@@ -7,7 +7,8 @@ function IngredientDetails({data}) {
 
   return (
     <div className={ingredientDetailsStyles.container}>
-      <h3 className={`${ingredientDetailsStyles.header} text text_type_main-large pt-10 pr-10 pl-10`}>Детали ингредиента</h3>
+      <h3 className={`${ingredientDetailsStyles.header} text text_type_main-large pt-10 pr-10 pl-10`}>Детали
+        ингредиента</h3>
       <img src={data.image_large} alt={data.name}></img>
       <p className={`text text_type_main-medium pt-4`}>{data.name}</p>
       <div className={`${ingredientDetailsStyles.ingredientsBox} pt-8`}>

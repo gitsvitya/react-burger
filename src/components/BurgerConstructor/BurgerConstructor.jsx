@@ -11,7 +11,7 @@ function BurgerConstructor() {
 
 
   const [OrderDetailsOpened, openOrderDetails] = React.useState(false);
-  const { burgerState } = React.useContext (BurgerConstructorContext);
+  const {burgerState} = React.useContext(BurgerConstructorContext);
 
   const [finalPrice, setFinalPrice] = React.useState();
 
@@ -27,7 +27,7 @@ function BurgerConstructor() {
 
   function openModal() {
     openOrderDetails(true);
-    getOrderData (numberOrderInfo, setOrderData);
+    getOrderData(numberOrderInfo, setOrderData);
   }
 
   function closeModal() {
@@ -40,7 +40,7 @@ function BurgerConstructor() {
     finalprice = burgerState.bun.price * 2;
     burgerState.ingredients.map((ingredient) => {
       finalprice = finalprice + ingredient.price;
-      }, [burgerState])
+    }, [burgerState])
     setFinalPrice(finalprice);
   });
 
