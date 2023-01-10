@@ -5,7 +5,6 @@ import listBorderPic from '../../images/illustration.svg'
 import Modal from '../Modal/Modal.jsx';
 import OrderDetails from '../OrderDetails/OrderDetails.jsx';
 import {BurgerConstructorContext} from "../../services/burgerCunstructorContext";
-import defaultBunPic from '../../images/illustration.svg';
 
 function BurgerConstructor() {
 
@@ -27,7 +26,7 @@ function BurgerConstructor() {
         <div className={bcStyles.listBorder}>
           <ConstructorElement
             text={burgerState.bun.name ? `${burgerState.bun.name} (верх)` : 'Выберите булку'}
-            thumbnail={burgerState.bun.image_mobile ? burgerState.bun.image_mobile : defaultBunPic}
+            thumbnail={burgerState.bun.image_mobile ? burgerState.bun.image_mobile : listBorderPic}
             price={burgerState.bun.price}
             type='top'
             isLocked={true}
@@ -56,7 +55,7 @@ function BurgerConstructor() {
         <div className={bcStyles.listBorder}>
           <ConstructorElement
             text={burgerState.bun.name ? `${burgerState.bun.name} (низ)` : 'Выберите булку'}
-            thumbnail={burgerState.bun.image_mobile ? burgerState.bun.image_mobile : defaultBunPic}
+            thumbnail={burgerState.bun.image_mobile ? burgerState.bun.image_mobile : listBorderPic}
             price={burgerState.bun.price}
             type='bottom'
             isLocked={true}

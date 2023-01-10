@@ -55,7 +55,7 @@ function BurgerIngredients() {
             {ingredientData.map((ingredient) => {
               if (ingredient.type === 'main') {
                 return (
-                  <IngredientItemRender data={ingredientData} key={ingredient._id}/>
+                  <IngredientItemRender data={ingredient} key={ingredient._id}/>
                 )
               }
             })}
