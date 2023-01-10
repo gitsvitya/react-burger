@@ -9,10 +9,35 @@ import {getIngredientsData} from "../../utils/api";
 
 function App() {
 
-  const [dataFromApi, setData] = React.useState([]);
+  const burgerInitialState = {
+    bun: [],
+    ingredients: []
+  };
+
+  function reducer(state: any, action: any) {
+    switch (action.type) {
+      case 'add':
+        if(action.payload.type === 'bun') {
+          return {
+            ...state,
+            bun: action.payload,
+          };
+        }
+          return {
+            ...state,
+            ingredients: [...state.ingredients, action.payload]
+          };
+      default:
+        throw new Error(`Wrong type of action: ${action.type}`);
+        }
+    }
+
+  const [burgerState, burgerDispatch] = React.useReducer(reducer, burgerInitialState);
+
+  const [dataFromApi, setDataFromApi] = React.useState([]);
 
   React.useEffect(() => {
-    getIngredientsData(setData);
+    getIngredientsData(setDataFromApi);
     }, []
   )
 
@@ -21,11 +46,11 @@ function App() {
       <AppHeader/>
       <main className={appStyles.main}>
         <BurgerIngredientsContext.Provider value={ dataFromApi }>
+          <BurgerConstructorContext.Provider value={ {burgerState, burgerDispatch} }>
             <BurgerIngredients />
-        </BurgerIngredientsContext.Provider>
-        <BurgerConstructorContext.Provider value={ dataFromApi }>
             <BurgerConstructor />
-        </BurgerConstructorContext.Provider>
+          </BurgerConstructorContext.Provider>
+        </BurgerIngredientsContext.Provider>
       </main>
     </div>
   );

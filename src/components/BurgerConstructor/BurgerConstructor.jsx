@@ -2,24 +2,16 @@ import React from 'react';
 import bcStyles from './BurgerConstructor.module.css';
 import {ConstructorElement, Button, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import listBorderPic from '../../images/illustration.svg'
-import PropTypes from 'prop-types';
-import apiPropTypes from '../../utils/propTypes.js';
 import Modal from '../Modal/Modal.jsx';
 import OrderDetails from '../OrderDetails/OrderDetails.jsx';
 import {BurgerConstructorContext} from "../../services/burgerCunstructorContext";
+import defaultBunPic from '../../images/illustration.svg';
 
-
-// Создаем функциональную компоненту BurgerConstructor, которая отвечает за формирование заказа бургера
-// исходя из выбранных ингредиентов, а также позволяет инициировать создание заказа при нажатии на
-// кнопку 'Оформить заказ'. Принимает на вход данные об ингредиентах из API.
 function BurgerConstructor() {
 
-  // Создаем хук для проверки статуса модального окна. При нажатии на кнопку 'Оформить заказ' рендерим
-  // модальное окно с данными из OrderDetails
 
   const [OrderDetailsOpened, openOrderDetails] = React.useState(false);
-
-  const dataFromApi = React.useContext(BurgerConstructorContext);
+  const { burgerState } = React.useContext (BurgerConstructorContext);
 
   function openModal() {
     openOrderDetails(true);
@@ -29,17 +21,14 @@ function BurgerConstructor() {
     openOrderDetails(false);
   }
 
-  // Рендерим контент из 2 булок и ингридиентов из API
   return (
     <section className={bcStyles.section}>
-
       <div className={bcStyles.bunConstructorList}>
-
         <div className={bcStyles.listBorder}>
           <ConstructorElement
-            text='Краторная булка N-200i (верх)'
-            thumbnail={listBorderPic}
-            price={20}
+            text={burgerState.bun.name ? `${burgerState.bun.name} (верх)` : 'Выберите булку'}
+            thumbnail={burgerState.bun.image_mobile ? burgerState.bun.image_mobile : defaultBunPic}
+            price={burgerState.bun.price}
             type='top'
             isLocked={true}
           />
@@ -47,7 +36,7 @@ function BurgerConstructor() {
 
         <ul className={`${bcStyles.ingredientsList} pt-4 pb-0 pr-0 pl-0`}>
           {
-            dataFromApi.map((ingredient) => {
+            burgerState.ingredients.map((ingredient) => {
               if (ingredient.type !== 'bun') {
                 return (
                   <li className={`${bcStyles.listItem} pb-4`} key={ingredient._id}>
@@ -66,9 +55,9 @@ function BurgerConstructor() {
 
         <div className={bcStyles.listBorder}>
           <ConstructorElement
-            text='Краторная булка N-200i (низ)'
-            thumbnail={listBorderPic}
-            price={20}
+            text={burgerState.bun.name ? `${burgerState.bun.name} (низ)` : 'Выберите булку'}
+            thumbnail={burgerState.bun.image_mobile ? burgerState.bun.image_mobile : defaultBunPic}
+            price={burgerState.bun.price}
             type='bottom'
             isLocked={true}
           />
@@ -92,10 +81,5 @@ function BurgerConstructor() {
     </section>
   )
 }
-
-// Проверяем данные, принимаемые BurgerConstructor, на соответствие форматам
-// BurgerConstructor.propTypes = {
-//   data: PropTypes.arrayOf(apiPropTypes).isRequired,
-// }
 
 export default BurgerConstructor

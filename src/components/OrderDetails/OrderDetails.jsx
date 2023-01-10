@@ -1,7 +1,6 @@
 import orderDetailsStyles from './OrderDetails.module.css';
 import donePic from '../../images/done.svg';
 
-// Создаем компонент OrderDetails для заполнения модального окна контентом подтверждения заказа
 function OrderDetails() {
   return (
       <div className={orderDetailsStyles.container}>

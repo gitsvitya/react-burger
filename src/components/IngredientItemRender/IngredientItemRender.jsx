@@ -4,15 +4,21 @@ import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-com
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import apiPropTypes from '../../utils/propTypes.js';
+import { BurgerConstructorContext } from '../../services/burgerCunstructorContext';
 
 // Компонент, объединивший в себе рендер ингридиента в соответствии с данными из получаемого API.
 // Помимо оптимизации кода позволяет подтягивать подтягивать в модальное окно актуальные данные каждого ингредиента.
 function IngredientItemRender({data}) {
 
   const [IngredientDetailsOpen, IngredientDetailsOpened] = React.useState(false)
+  const { burgerDispatch } = React.useContext(BurgerConstructorContext);
 
   function openModal() {
     IngredientDetailsOpened(true);
+    burgerDispatch({
+      type: 'add',
+      payload: data
+    })
   }
 
   function closeModal() {
@@ -40,8 +46,8 @@ function IngredientItemRender({data}) {
   )
 }
 
-IngredientItemRender.propTypes = {
-  data: apiPropTypes.isRequired
-};
+// IngredientItemRender.propTypes = {
+//   data: apiPropTypes.isRequired
+// };
 
 export default IngredientItemRender;
