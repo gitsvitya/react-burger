@@ -1,10 +1,10 @@
 import orderDetailsStyles from './OrderDetails.module.css';
 import donePic from '../../images/done.svg';
 
-function OrderDetails() {
+function OrderDetails({receivedOrderNumber}) {
   return (
       <div className={orderDetailsStyles.container}>
-        <h3 className={`${orderDetailsStyles.header} text text_type_digits-large`}>034536</h3>
+        <h3 className={`${orderDetailsStyles.header} text text_type_digits-large`}>{receivedOrderNumber}</h3>
         <p className={`text text_type_main-medium pt-8`}>идентификатор заказа</p>
         <div className={orderDetailsStyles.donePic}>
           <img src={donePic} alt='Успех!'></img>

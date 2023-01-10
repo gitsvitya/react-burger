@@ -14,3 +14,22 @@ fetch(ingredientsDataLink)
     console.log(`Ошибка: ${err}`)
   })
 }
+
+export const getOrderData = (orderSentData, setOrderData) => {
+  fetch (ordersDataLink, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(orderSentData)
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject('Ошибка: ${res.status}')
+    })
+    .then(receivedData => {
+      setOrderData(receivedData);
+    })
+}

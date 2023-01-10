@@ -5,6 +5,7 @@ import listBorderPic from '../../images/illustration.svg'
 import Modal from '../Modal/Modal.jsx';
 import OrderDetails from '../OrderDetails/OrderDetails.jsx';
 import {BurgerConstructorContext} from "../../services/burgerCunstructorContext";
+import {getOrderData} from "../../utils/api";
 
 function BurgerConstructor() {
 
@@ -12,14 +13,26 @@ function BurgerConstructor() {
   const [OrderDetailsOpened, openOrderDetails] = React.useState(false);
   const { burgerState } = React.useContext (BurgerConstructorContext);
 
-  const [finalPrice, setfinalPrice] = React.useState();
+  const [finalPrice, setFinalPrice] = React.useState();
+
+  const [orderData, setOrderData] = React.useState();
+
+  const numberOrderInfo = {
+    "ingredients": [
+      burgerState.bun._id,
+      ...burgerState.ingredients.map((ingredient) => ingredient._id),
+      burgerState.bun._id
+    ]
+  };
 
   function openModal() {
     openOrderDetails(true);
+    getOrderData (numberOrderInfo, setOrderData);
   }
 
   function closeModal() {
     openOrderDetails(false);
+    setOrderData(null);
   }
 
   React.useEffect(() => {
@@ -28,7 +41,7 @@ function BurgerConstructor() {
     burgerState.ingredients.map((ingredient) => {
       finalprice = finalprice + ingredient.price;
       }, [burgerState])
-    setfinalPrice(finalprice);
+    setFinalPrice(finalprice);
   });
 
   return (
@@ -83,9 +96,9 @@ function BurgerConstructor() {
         <Button type='primary' size='large' htmlType='button' onClick={openModal}>Оформить заказ</Button>
       </div>
 
-      {OrderDetailsOpened &&
+      {OrderDetailsOpened && orderData &&
         <Modal closeModal={closeModal}>
-          <OrderDetails closeModal={closeModal}/>
+          <OrderDetails closeModal={closeModal} receivedOrderNumber={orderData.order.number}/>
         </Modal>
       }
     </section>
