@@ -12,6 +12,8 @@ function BurgerConstructor() {
   const [OrderDetailsOpened, openOrderDetails] = React.useState(false);
   const { burgerState } = React.useContext (BurgerConstructorContext);
 
+  const [finalPrice, setfinalPrice] = React.useState();
+
   function openModal() {
     openOrderDetails(true);
   }
@@ -19,6 +21,15 @@ function BurgerConstructor() {
   function closeModal() {
     openOrderDetails(false);
   }
+
+  React.useEffect(() => {
+    let finalprice = 0;
+    finalprice = burgerState.bun.price * 2;
+    burgerState.ingredients.map((ingredient) => {
+      finalprice = finalprice + ingredient.price;
+      }, [burgerState])
+    setfinalPrice(finalprice);
+  });
 
   return (
     <section className={bcStyles.section}>
@@ -66,7 +77,7 @@ function BurgerConstructor() {
 
       <div className={`${bcStyles.orderResultContainer} pt-10 pr-4`}>
         <div className={bcStyles.priceSum}>
-          <p className='text text_type_digits-medium'>610</p>
+          <p className='text text_type_digits-medium'>{finalPrice ? finalPrice : 0}</p>
           <CurrencyIcon type='primary'/>
         </div>
         <Button type='primary' size='large' htmlType='button' onClick={openModal}>Оформить заказ</Button>
