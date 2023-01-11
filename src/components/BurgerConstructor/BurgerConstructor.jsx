@@ -10,7 +10,7 @@ import {getOrderData} from "../../utils/api";
 function BurgerConstructor() {
 
 
-  const [OrderDetailsOpened, openOrderDetails] = React.useState(false);
+  const [orderDetailsOpened, openOrderDetails] = React.useState(false);
   const {burgerState} = React.useContext(BurgerConstructorContext);
 
   const [finalPrice, setFinalPrice] = React.useState();
@@ -96,7 +96,7 @@ function BurgerConstructor() {
         <Button type='primary' size='large' htmlType='button' onClick={openModal}>Оформить заказ</Button>
       </div>
 
-      {OrderDetailsOpened && orderData &&
+      {orderDetailsOpened && orderData &&
         <Modal closeModal={closeModal}>
           <OrderDetails receivedOrderNumber={orderData.order.number}/>
         </Modal>
