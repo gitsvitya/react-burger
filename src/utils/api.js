@@ -1,14 +1,18 @@
-const ingredientsDataLink = 'https://norma.nomoreparties.space/api/ingredients';
-const ordersDataLink = 'https://norma.nomoreparties.space/api/orders';
+import React from "react";
+
+const BASE_URL = 'https://norma.nomoreparties.space/api';
+
+function checkResponse (res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(`Ошибка: ${res.status}`)
+  }
+}
 
 export const getIngredientsData = (setData) => {
-fetch(ingredientsDataLink)
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject('Ошибка: ${res.status}')
-  })
+fetch(`${BASE_URL}/ingredients`)
+  .then(res => checkResponse(res))
   .then(json => setData(json.data))
   .catch((err) => {
     console.log(`Ошибка: ${err}`)
@@ -16,20 +20,20 @@ fetch(ingredientsDataLink)
 }
 
 export const getOrderData = (orderSentData, setOrderData) => {
-  fetch (ordersDataLink, {
+
+
+  fetch (`${BASE_URL}/orders`, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json'
     },
     body: JSON.stringify(orderSentData)
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject('Ошибка: ${res.status}')
-    })
+    .then(res => checkResponse(res))
     .then(receivedData => {
       setOrderData(receivedData);
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`)
     })
 }

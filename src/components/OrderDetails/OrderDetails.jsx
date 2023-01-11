@@ -1,10 +1,19 @@
 import orderDetailsStyles from './OrderDetails.module.css';
 import donePic from '../../images/done.svg';
+import React from "react";
+import {BurgerConstructorContext} from "../../services/burgerCunstructorContext";
 
 function OrderDetails({receivedOrderNumber}) {
+
+  const {burgerDispatch} = React.useContext(BurgerConstructorContext);
+
+  React.useEffect(() => {
+    burgerDispatch({type: 'clear'})
+  }, [receivedOrderNumber]);
+
   return (
     <div className={orderDetailsStyles.container}>
-      <h3 className={`${orderDetailsStyles.header} text text_type_digits-large`}>{receivedOrderNumber}</h3>
+      <h3 className={`${orderDetailsStyles.header} text text_type_digits-large`}>{ receivedOrderNumber ? receivedOrderNumber : 'Загрузка...'}</h3>
       <p className={`text text_type_main-medium pt-8`}>идентификатор заказа</p>
       <div className={orderDetailsStyles.donePic}>
         <img src={donePic} alt='Успех!'></img>

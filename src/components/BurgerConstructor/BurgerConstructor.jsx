@@ -36,12 +36,12 @@ function BurgerConstructor() {
   }
 
   React.useEffect(() => {
-    let finalprice = 0;
-    finalprice = burgerState.bun.price * 2;
+    let finalPrice = 0;
+    finalPrice = burgerState.bun.price * 2;
     burgerState.ingredients.map((ingredient) => {
-      finalprice = finalprice + ingredient.price;
+      finalPrice = finalPrice + ingredient.price;
     }, [burgerState])
-    setFinalPrice(finalprice);
+    setFinalPrice(finalPrice);
   });
 
   return (

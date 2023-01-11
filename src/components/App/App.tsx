@@ -27,6 +27,8 @@ function App() {
           ...state,
           ingredients: [...state.ingredients, action.payload]
         };
+      case 'clear':
+        return burgerInitialState;
       default:
         throw new Error(`Wrong type of action: ${action.type}`);
     }
