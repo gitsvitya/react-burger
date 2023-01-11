@@ -98,7 +98,7 @@ function BurgerConstructor() {
 
       {OrderDetailsOpened && orderData &&
         <Modal closeModal={closeModal}>
-          <OrderDetails closeModal={closeModal} receivedOrderNumber={orderData.order.number}/>
+          <OrderDetails receivedOrderNumber={orderData.order.number}/>
         </Modal>
       }
     </section>

@@ -10,11 +10,11 @@ import {BurgerConstructorContext} from '../../services/burgerCunstructorContext'
 // Помимо оптимизации кода позволяет подтягивать подтягивать в модальное окно актуальные данные каждого ингредиента.
 function IngredientItemRender({data}) {
 
-  const [IngredientDetailsOpen, IngredientDetailsOpened] = React.useState(false)
+  const [ingredientDetailsOpen, ingredientDetailsOpened] = React.useState(false)
   const {burgerDispatch} = React.useContext(BurgerConstructorContext);
 
   function openModal() {
-    IngredientDetailsOpened(true);
+    ingredientDetailsOpened(true);
     burgerDispatch({
       type: 'add',
       payload: data
@@ -22,7 +22,7 @@ function IngredientItemRender({data}) {
   }
 
   function closeModal() {
-    IngredientDetailsOpened(false);
+    ingredientDetailsOpened(false);
   }
 
   return (
@@ -37,9 +37,9 @@ function IngredientItemRender({data}) {
         <p className='text text_type_main-default'>{data.name}</p>
       </li>
       {
-        IngredientDetailsOpen &&
+        ingredientDetailsOpen &&
         <Modal closeModal={closeModal}>
-          <IngredientDetails data={data} closeModal={closeModal}/>
+          <IngredientDetails data={data} />
         </Modal>
       }
     </>
