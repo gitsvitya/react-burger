@@ -1,7 +1,6 @@
 import ingredientDetailsStyles from './IngredientDetails.module.css';
 import apiPropTypes from '../../utils/propTypes.js';
 
-// Компонент IngredientDetails для заполнения модального окна контентом описания ингридиента
 function IngredientDetails({data}) {
 
 

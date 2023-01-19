@@ -11,6 +11,8 @@ function IngredientItemRender({data}) {
 
   const dispatch = useDispatch();
   const selectedIngredient = useSelector(state => state.ingredientItemRenderReducer.selectedIngredient);
+  const addedBurgerIngredients = useSelector(state => state.burgerConstructorReducer);
+
   const [ingredientDetailsOpen, ingredientDetailsOpened] = React.useState(false)
 
   function openModal() {
@@ -23,11 +25,19 @@ function IngredientItemRender({data}) {
     dispatch({ type: CLEAR_MODAL});
   }
 
+  const ingredientsCounter = (() => {
+    if (addedBurgerIngredients.bun === null)
+      return 0;
+    return data.type === 'bun' && data._id === addedBurgerIngredients.bun._id
+    ? 2
+      : addedBurgerIngredients.ingredients.filter((item) => item._id === addedBurgerIngredients._id).length;
+  }, [addedBurgerIngredients.ingredients, addedBurgerIngredients.bun, data]);
+
   return (
     <>
       <li className={ingredientItemRenderStyles.listItem} key={data._id} onClick={openModal}>
         <img src={data.image} alt={data.name}/>
-        <Counter count={1} size='default' extraClass={ingredientItemRenderStyles.counter}/>
+        {ingredientsCounter>0 && <Counter count={ingredientsCounter} size='default' extraClass={ingredientItemRenderStyles.counter}/>}
         <div className={ingredientItemRenderStyles.priceContainer}>
           <p className='text text_type_digits-default'>{data.price}</p>
           <CurrencyIcon type='primary'/>
