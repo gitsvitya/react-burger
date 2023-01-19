@@ -4,30 +4,27 @@ import {ConstructorElement, Button, DragIcon, CurrencyIcon} from '@ya.praktikum/
 import listBorderPic from '../../images/illustration.svg'
 import Modal from '../Modal/Modal.jsx';
 import OrderDetails from '../OrderDetails/OrderDetails.jsx';
-import {BurgerConstructorContext} from "../../services/burgerCunstructorContext";
-import {getOrderData} from "../../utils/api";
+import {useDispatch, useSelector} from "react-redux";
 
 function BurgerConstructor() {
 
+  const burgerInnerIngredients = useSelector(state => state.burgerConstructorReducer);
 
   const [orderDetailsOpened, openOrderDetails] = React.useState(false);
-  const {burgerState} = React.useContext(BurgerConstructorContext);
-
   const [finalPrice, setFinalPrice] = React.useState();
-
   const [orderData, setOrderData] = React.useState();
 
-  const numberOrderInfo = {
-    "ingredients": [
-      burgerState.bun._id,
-      ...burgerState.ingredients.map((ingredient) => ingredient._id),
-      burgerState.bun._id
-    ]
-  };
+  // const numberOrderInfo = {
+  //   "ingredients": [
+  //     burgerInnerIngredients.bun._id,
+  //     ...burgerInnerIngredients.ingredients.map((ingredient) => ingredient._id),
+  //     burgerInnerIngredients.bun._id
+  //   ]
+  // };
 
   function openModal() {
     openOrderDetails(true);
-    getOrderData(numberOrderInfo, setOrderData);
+    // getOrderData(numberOrderInfo, setOrderData);
   }
 
   function closeModal() {
@@ -37,21 +34,21 @@ function BurgerConstructor() {
 
   React.useEffect(() => {
     let finalPrice = 0;
-    finalPrice = burgerState.bun.price * 2;
-    burgerState.ingredients.map((ingredient) => {
+    finalPrice = burgerInnerIngredients.bun.price * 2;
+    burgerInnerIngredients.ingredients.map((ingredient) => {
       finalPrice = finalPrice + ingredient.price;
-    }, [burgerState])
+    }, [burgerInnerIngredients.ingredients])
     setFinalPrice(finalPrice);
-  });
+  }, [burgerInnerIngredients]);
 
   return (
     <section className={bcStyles.section}>
       <div className={bcStyles.bunConstructorList}>
         <div className={bcStyles.listBorder}>
           <ConstructorElement
-            text={burgerState.bun.name ? `${burgerState.bun.name} (верх)` : 'Выберите булку'}
-            thumbnail={burgerState.bun.image_mobile ? burgerState.bun.image_mobile : listBorderPic}
-            price={burgerState.bun.price}
+            text={burgerInnerIngredients.bun.name ? `${burgerInnerIngredients.bun.name} (верх)` : 'Выберите булку'}
+            thumbnail={burgerInnerIngredients.bun.image_mobile ? burgerInnerIngredients.bun.image_mobile : listBorderPic}
+            price={burgerInnerIngredients.bun.price}
             type='top'
             isLocked={true}
           />
@@ -59,7 +56,7 @@ function BurgerConstructor() {
 
         <ul className={`${bcStyles.ingredientsList} pt-4 pb-0 pr-0 pl-0`}>
           {
-            burgerState.ingredients.map((ingredient) => {
+            burgerInnerIngredients.ingredients.map((ingredient) => {
               if (ingredient.type !== 'bun') {
                 return (
                   <li className={`${bcStyles.listItem} pb-4`} key={ingredient._id}>
@@ -78,9 +75,9 @@ function BurgerConstructor() {
 
         <div className={bcStyles.listBorder}>
           <ConstructorElement
-            text={burgerState.bun.name ? `${burgerState.bun.name} (низ)` : 'Выберите булку'}
-            thumbnail={burgerState.bun.image_mobile ? burgerState.bun.image_mobile : listBorderPic}
-            price={burgerState.bun.price}
+            text={burgerInnerIngredients.bun.name ? `${burgerInnerIngredients.bun.name} (низ)` : 'Выберите булку'}
+            thumbnail={burgerInnerIngredients.bun.image_mobile ? burgerInnerIngredients.bun.image_mobile : listBorderPic}
+            price={burgerInnerIngredients.bun.price}
             type='bottom'
             isLocked={true}
           />

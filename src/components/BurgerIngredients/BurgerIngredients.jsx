@@ -2,14 +2,13 @@ import React from 'react';
 import biStyles from './BurgerIngredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientItemRender from '../IngredientItemRender/IngredientItemRender.jsx';
-import {BurgerIngredientsContext} from "../../services/burgerIngredientsContext";
-
+import {useSelector} from "react-redux";
 
 function BurgerIngredients() {
 
   const [currentTab, setCurrentTab] = React.useState('one')
 
-  const ingredientData = React.useContext(BurgerIngredientsContext);
+  const ingredientData = useSelector(state => state.burgerIngredientsReducer.burgerIngredients);
 
   const bunRef = React.useRef();
   const sauceRef = React.useRef();
@@ -17,22 +16,17 @@ function BurgerIngredients() {
 
   const scrollToBun = (id) => {
     setCurrentTab(id);
-    bunRef.current.scrollIntoView({ behavior: 'smooth' })
+    bunRef.current.scrollIntoView({behavior: 'smooth'})
   }
   const scrollToSause = (id) => {
     setCurrentTab(id);
-    sauceRef.current.scrollIntoView({ behavior: 'smooth' })
+    sauceRef.current.scrollIntoView({behavior: 'smooth'})
   }
 
   const scrollToMain = (id) => {
     setCurrentTab(id);
-    mainRef.current.scrollIntoView({ behavior: 'smooth' })
+    mainRef.current.scrollIntoView({behavior: 'smooth'})
   }
-
-  // const handleScroll = (id) => {
-  //   setCurrentTab(id);
-  //   document.querySelector(`#${id}`)?.scrollIntoView({behavior: 'smooth'})
-  // }
 
   return (
     <section className={`${biStyles.section} pt-10`}>

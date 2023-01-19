@@ -4,25 +4,23 @@ import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-com
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import apiPropTypes from '../../utils/propTypes.js';
-import {BurgerConstructorContext} from '../../services/burgerCunstructorContext';
+import { useSelector, useDispatch } from 'react-redux';
+import {SET_MODAL, CLEAR_MODAL} from "../../services/actions/IngredientItemRender";
 
-// Компонент, объединивший в себе рендер ингридиента в соответствии с данными из получаемого API.
-// Помимо оптимизации кода позволяет подтягивать подтягивать в модальное окно актуальные данные каждого ингредиента.
 function IngredientItemRender({data}) {
 
+  const dispatch = useDispatch();
+  const selectedIngredient = useSelector(state => state.ingredientItemRenderReducer.selectedIngredient);
   const [ingredientDetailsOpen, ingredientDetailsOpened] = React.useState(false)
-  const {burgerDispatch} = React.useContext(BurgerConstructorContext);
 
   function openModal() {
     ingredientDetailsOpened(true);
-    burgerDispatch({
-      type: 'add',
-      payload: data
-    })
+    dispatch({ type: SET_MODAL, payload: data });
   }
 
   function closeModal() {
     ingredientDetailsOpened(false);
+    dispatch({ type: CLEAR_MODAL});
   }
 
   return (
@@ -39,7 +37,7 @@ function IngredientItemRender({data}) {
       {
         ingredientDetailsOpen &&
         <Modal closeModal={closeModal}>
-          <IngredientDetails data={data} />
+          <IngredientDetails data={selectedIngredient} />
         </Modal>
       }
     </>
