@@ -1,7 +1,8 @@
 import {
   BURGER_CONSTRUCTOR_ADD,
   BURGER_CONSTRUCTOR_DELETE,
-  BURGER_CONSTRUCTOR_CLEAR
+  BURGER_CONSTRUCTOR_CLEAR,
+  BURGER_CONSTRUCTOR_SORT,
 } from "../actions/BurgerConstructor";
 
 const initialState = {
@@ -31,6 +32,14 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       return {
         bun: false,
         ingredients: []
+
+      }
+    case BURGER_CONSTRUCTOR_SORT:
+      const ingredientsList = [...state.ingredients]
+      ingredientsList.splice(action.hoverIndex, 0, ingredientsList.splice(action.dragIndex, 1)[0])
+      return {
+        ...state,
+        ingredients: ingredientsList
       }
     default:
       return state;

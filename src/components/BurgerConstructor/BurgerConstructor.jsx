@@ -5,26 +5,46 @@ import listBorderPic from '../../images/illustration.svg'
 import Modal from '../Modal/Modal.jsx';
 import OrderDetails from '../OrderDetails/OrderDetails.jsx';
 import {useDispatch, useSelector} from "react-redux";
+import {getOrderNumber} from "../../services/actions/OrderDetails";
+import {v4 as uuidv4} from 'uuid';
+import {BURGER_CONSTRUCTOR_ADD} from '../../services/actions/BurgerConstructor';
+import { useDrop } from 'react-dnd';
 
 function BurgerConstructor() {
 
+  const dispatch = useDispatch();
+
   const burgerInnerIngredients = useSelector(state => state.burgerConstructorReducer);
+  const numberOrderInfo = useSelector(state => state.orderDetailsReducer.orderNumber);
 
   const [orderDetailsOpened, openOrderDetails] = React.useState(false);
   const [finalPrice, setFinalPrice] = React.useState();
   const [orderData, setOrderData] = React.useState();
 
-  // const numberOrderInfo = {
-  //   "ingredients": [
-  //     burgerInnerIngredients.bun._id,
-  //     ...burgerInnerIngredients.ingredients.map((ingredient) => ingredient._id),
-  //     burgerInnerIngredients.bun._id
-  //   ]
-  // };
+  const dndIngredients = React.useMemo(() => burgerInnerIngredients.ingredients.filter((ingredient) =>
+  ingredient.type !== 'bun'), [burgerInnerIngredients.ingredients]);
+
+  const burgerConstructor = {
+    "ingredients": [
+      burgerInnerIngredients.bun._id,
+      ...burgerInnerIngredients.ingredients.map((ingredient) => ingredient._id),
+      burgerInnerIngredients.bun._id
+    ]
+  };
+
+  const [{isHover}, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      dispatch ({
+        type: BURGER_CONSTRUCTOR_ADD,
+        payload: { ...item, key: uuidv4()}
+      })
+    },
+  });
 
   function openModal() {
     openOrderDetails(true);
-    // getOrderData(numberOrderInfo, setOrderData);
+    dispatch(getOrderNumber(burgerConstructor, setOrderData));
   }
 
   function closeModal() {
@@ -42,7 +62,7 @@ function BurgerConstructor() {
   }, [burgerInnerIngredients]);
 
   return (
-    <section className={bcStyles.section}>
+    <section className={bcStyles.section} ref={dropTarget}>
       <div className={bcStyles.bunConstructorList}>
         <div className={bcStyles.listBorder}>
           <ConstructorElement

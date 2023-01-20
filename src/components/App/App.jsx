@@ -5,6 +5,8 @@ import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import {getBurgerIngredientsData} from '../../services/actions/BurgerIngredients';
 import {useDispatch} from 'react-redux';
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
 function App() {
 
@@ -18,8 +20,10 @@ function App() {
     <div className={appStyles.page}>
       <AppHeader/>
       <main className={appStyles.main}>
-        <BurgerIngredients/>
-        <BurgerConstructor/>
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients/>
+          <BurgerConstructor/>
+        </DndProvider>
       </main>
     </div>
   )

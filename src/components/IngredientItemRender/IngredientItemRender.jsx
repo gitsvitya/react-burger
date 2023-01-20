@@ -6,6 +6,7 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import apiPropTypes from '../../utils/propTypes.js';
 import { useSelector, useDispatch } from 'react-redux';
 import {SET_MODAL, CLEAR_MODAL} from "../../services/actions/IngredientItemRender";
+import { useDrag } from 'react-dnd';
 
 function IngredientItemRender({data}) {
 
@@ -25,6 +26,14 @@ function IngredientItemRender({data}) {
     dispatch({ type: CLEAR_MODAL});
   }
 
+  const [{ opacity }, dragRef] = useDrag({
+    type: "ingredient",
+    item: data,
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.5 : 1
+    })
+  });
+
   const ingredientsCounter = (() => {
     if (addedBurgerIngredients.bun === null)
       return 0;
@@ -35,8 +44,8 @@ function IngredientItemRender({data}) {
 
   return (
     <>
-      <li className={ingredientItemRenderStyles.listItem} key={data._id} onClick={openModal}>
-        <img src={data.image} alt={data.name}/>
+      <li className={ingredientItemRenderStyles.listItem} key={data._id} onClick={openModal} ref={dragRef}>
+        <img src={data.image} alt={data.name} style={{opacity}}/>
         {ingredientsCounter>0 && <Counter count={ingredientsCounter} size='default' extraClass={ingredientItemRenderStyles.counter}/>}
         <div className={ingredientItemRenderStyles.priceContainer}>
           <p className='text text_type_digits-default'>{data.price}</p>
