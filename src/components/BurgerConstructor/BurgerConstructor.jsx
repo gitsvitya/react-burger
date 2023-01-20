@@ -9,6 +9,7 @@ import {getOrderNumber} from "../../services/actions/OrderDetails";
 import {v4 as uuidv4} from 'uuid';
 import {BURGER_CONSTRUCTOR_ADD} from '../../services/actions/BurgerConstructor';
 import { useDrop } from 'react-dnd';
+import DndIngredientsConstructor from "../DndIngredientsConstructor/DndIngredientsConstructor";
 
 function BurgerConstructor() {
 
@@ -76,19 +77,10 @@ function BurgerConstructor() {
 
         <ul className={`${bcStyles.ingredientsList} pt-4 pb-0 pr-0 pl-0`}>
           {
-            burgerInnerIngredients.ingredients.map((ingredient) => {
-              if (ingredient.type !== 'bun') {
-                return (
-                  <li className={`${bcStyles.listItem} pb-4`} key={ingredient._id}>
-                    <DragIcon type='primary'/>
-                    <ConstructorElement
-                      text={ingredient.name}
-                      thumbnail={ingredient.image_mobile}
-                      price={ingredient.price}
-                    />
-                  </li>
-                )
-              }
+            dndIngredients.map((ingredient, index) => {
+              return (
+                <DndIngredientsConstructor key={ingredient.key} ingredient={ingredient} index={index} />
+              )
             })
           }
         </ul>
@@ -115,7 +107,7 @@ function BurgerConstructor() {
 
       {orderDetailsOpened && orderData &&
         <Modal closeModal={closeModal}>
-          <OrderDetails receivedOrderNumber={orderData.order.number}/>
+          <OrderDetails receivedOrderNumber={numberOrderInfo.number}/>
         </Modal>
       }
     </section>

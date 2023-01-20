@@ -1,15 +1,8 @@
 import orderDetailsStyles from './OrderDetails.module.css';
 import donePic from '../../images/done.svg';
 import React from "react";
-import {BurgerConstructorContext} from "../../services/burgerCunstructorContext";
 
 function OrderDetails({receivedOrderNumber}) {
-
-  const {burgerDispatch} = React.useContext(BurgerConstructorContext);
-
-  React.useEffect(() => {
-    burgerDispatch({type: 'clear'})
-  }, [receivedOrderNumber]);
 
   return (
     <div className={orderDetailsStyles.container}>

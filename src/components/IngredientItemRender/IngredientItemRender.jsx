@@ -34,12 +34,12 @@ function IngredientItemRender({data}) {
     })
   });
 
-  const ingredientsCounter = (() => {
-    if (addedBurgerIngredients.bun === null)
+  const ingredientsCounter = React.useMemo(() => {
+    if (addedBurgerIngredients.bun === false)
       return 0;
     return data.type === 'bun' && data._id === addedBurgerIngredients.bun._id
     ? 2
-      : addedBurgerIngredients.ingredients.filter((item) => item._id === addedBurgerIngredients._id).length;
+      : addedBurgerIngredients.ingredients.filter((item) => item._id === data._id).length;
   }, [addedBurgerIngredients.ingredients, addedBurgerIngredients.bun, data]);
 
   return (
