@@ -1,8 +1,7 @@
 import ingredientDetailsStyles from './IngredientDetails.module.css';
-import apiPropTypes from '../../utils/propTypes.js';
+import apiPropTypes from '../../utils/propTypes';
 
 function IngredientDetails({data}) {
-
 
   return (
     <div className={ingredientDetailsStyles.container}>
@@ -29,7 +28,7 @@ function IngredientDetails({data}) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 IngredientDetails.propTypes = {

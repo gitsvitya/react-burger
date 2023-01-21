@@ -1,39 +1,43 @@
-import React from 'react';
 import biStyles from './BurgerIngredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientItemRender from '../IngredientItemRender/IngredientItemRender.jsx';
-import {useSelector} from "react-redux";
-import {useInView} from "react-intersection-observer";
+import IngredientItemRender from '../IngredientItemRender/IngredientItemRender';
+import React from 'react';
+import {useSelector} from 'react-redux';
+import {useInView} from 'react-intersection-observer';
+import {mergeRefs} from "react-merge-refs";
 
 function BurgerIngredients() {
 
-  const [currentTab, setCurrentTab] = React.useState('one')
+  const [currentTab, setCurrentTab] = React.useState('bun');
 
   const ingredientData = useSelector(state => state.burgerIngredientsReducer.burgerIngredients);
 
   const [bunRef, bunInView] = useInView({
-    threshold: 0.1
+    threshold: 0.5
   });
   const [sauceRef, sauceInView] = useInView({
-    threshold: 0.1
+    threshold: 0.5
   });
   const [mainRef, mainInView] = useInView({
-    threshold: 0.1
+    threshold: 0.5
   });
+
+  const scrollToBunRef = React.useRef();
+  const scrollToSauceRef = React.useRef();
+  const scrollToMainRef = React.useRef();
 
   const scrollToBun = (id) => {
     setCurrentTab(id);
-    bunRef.current.scrollIntoView({behavior: 'smooth'})
-  }
-  const scrollToSause = (id) => {
+    scrollToBunRef.current.scrollIntoView({behavior: 'smooth'});
+  };
+  const scrollToSauce = (id) => {
     setCurrentTab(id);
-    sauceRef.current.scrollIntoView({behavior: 'smooth'})
-  }
-
+    scrollToSauceRef.current.scrollIntoView({behavior: 'smooth'});
+  };
   const scrollToMain = (id) => {
     setCurrentTab(id);
-    mainRef.current.scrollIntoView({behavior: 'smooth'})
-  }
+    scrollToMainRef.current.scrollIntoView({behavior: 'smooth'});
+  };
 
   const handleIngredientScroll = () => {
     switch (true) {
@@ -44,7 +48,7 @@ function BurgerIngredients() {
         setCurrentTab('sauce');
         break;
       case mainInView:
-        setCurrentTab('mains');
+        setCurrentTab('main');
         break;
       default:
         break;
@@ -59,13 +63,13 @@ function BurgerIngredients() {
     <section className={`${biStyles.section} pt-10`}>
       <h1 className='text text_type_main-large'>Соберите бургер</h1>
       <div className={`${biStyles.tabHolder} pt-5`}>
-        <Tab value={'bun'} active={currentTab === 'bun'} onClick={scrollToBun}>Булки</Tab>
-        <Tab value={'sauce'} active={currentTab === 'sauce'} onClick={scrollToSause}>Соусы</Tab>
-        <Tab value={'mains'} active={currentTab === 'mains'} onClick={scrollToMain}>Начинки</Tab>
+        <Tab value='bun' active={currentTab === 'bun'} onClick={scrollToBun}>Булки</Tab>
+        <Tab value='sauce' active={currentTab === 'sauce'} onClick={scrollToSauce}>Соусы</Tab>
+        <Tab value='main' active={currentTab === 'main'} onClick={scrollToMain}>Начинки</Tab>
       </div>
       <div className={biStyles.ingredients}>
         <div className={`pt-10 pb-5`}>
-          <h2 className='text text_type_main-medium' ref={bunRef}>Булки</h2>
+          <h2 className='text text_type_main-medium' ref={mergeRefs([bunRef, scrollToBunRef])}>Булки</h2>
           <ul className={`${biStyles.list} pt-6`}>
             {ingredientData.map((ingredient) => {
               if (ingredient.type === 'bun') {
@@ -77,7 +81,7 @@ function BurgerIngredients() {
           </ul>
         </div>
         <div className={`pt-10 pb-5`}>
-          <h2 className='text text_type_main-medium' ref={sauceRef}>Соусы</h2>
+          <h2 className='text text_type_main-medium' ref={mergeRefs([sauceRef, scrollToSauceRef])}>Соусы</h2>
           <ul className={`${biStyles.list} pt-6`}>
             {ingredientData.map((ingredient) => {
               if (ingredient.type === 'sauce') {
@@ -89,7 +93,7 @@ function BurgerIngredients() {
           </ul>
         </div>
         <div className={`pt-10 pb-5`}>
-          <h2 className='text text_type_main-medium' ref={mainRef}>Начинки</h2>
+          <h2 className='text text_type_main-medium' ref={mergeRefs([mainRef, scrollToMainRef])}>Начинки</h2>
           <ul className={`${biStyles.list} pt-6`}>
             {ingredientData.map((ingredient) => {
               if (ingredient.type === 'main') {
@@ -102,7 +106,7 @@ function BurgerIngredients() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 export default BurgerIngredients;

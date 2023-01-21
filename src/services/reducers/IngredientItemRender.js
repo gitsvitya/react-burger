@@ -1,8 +1,8 @@
-import {SET_MODAL, CLEAR_MODAL} from "../actions/IngredientItemRender";
+import {SET_MODAL, CLEAR_MODAL} from '../actions/IngredientItemRender';
 
 const initialState = {
   selectedIngredient: null
-}
+};
 
 export const ingredientItemRenderReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,4 +19,4 @@ export const ingredientItemRenderReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

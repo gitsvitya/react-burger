@@ -1,16 +1,15 @@
-import React from 'react'
-import {useDispatch} from "react-redux";
-import {BURGER_CONSTRUCTOR_DELETE, BURGER_CONSTRUCTOR_SORT} from "../../services/actions/BurgerConstructor";
-import { useDrag, useDrop } from 'react-dnd';
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import bcStyles from '../BurgerConstructor/BurgerConstructor.module.css';
+import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
+import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import {BURGER_CONSTRUCTOR_DELETE, BURGER_CONSTRUCTOR_SORT} from '../../services/actions/BurgerConstructor';
+import React from 'react'
+import {useDispatch} from 'react-redux';
+import {useDrag, useDrop} from 'react-dnd';
 
+function DndIngredientsConstructor({ingredient, index}) {
 
-
-function DndIngredientsConstructor ({ingredient, index}) {
   const dispatch = useDispatch();
-  const ref = React.useRef();
+  const dndMainRef = React.useRef();
   const ingredientId = ingredient.id;
 
   const moveIngredient = (dragIndex, hoverIndex) => {
@@ -28,7 +27,7 @@ function DndIngredientsConstructor ({ingredient, index}) {
       }
     },
     hover(item, monitor) {
-      if (!ref.current) {
+      if (!dndMainRef.current) {
         return
       }
       const dragIndex = item.index;
@@ -37,7 +36,7 @@ function DndIngredientsConstructor ({ingredient, index}) {
         return;
       }
 
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverBoundingRect = dndMainRef.current?.getBoundingClientRect();
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
@@ -68,7 +67,7 @@ function DndIngredientsConstructor ({ingredient, index}) {
 
   const opacity = isDragging ? 0 : 1;
 
-  drag(drop(ref));
+  drag(drop(dndMainRef));
 
   const deleteItem = () => {
     dispatch({
@@ -78,7 +77,7 @@ function DndIngredientsConstructor ({ingredient, index}) {
   };
 
   return (
-    <li className={`${bcStyles.listItem} pb-4`} key={ingredient._id} ref={ref} style={{opacity}}>
+    <li className={`${bcStyles.listItem} pb-4`} key={ingredient._id} ref={dndMainRef} style={{opacity}}>
       <DragIcon type='primary'/>
       <ConstructorElement
         text={ingredient.name}

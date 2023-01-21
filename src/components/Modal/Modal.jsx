@@ -1,9 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import modStyles from './Modal.module.css';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
-import modStyles from './Modal.module.css';
-import PropTypes from 'prop-types';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const Modal = ({children, closeModal}) => {
 
@@ -14,12 +13,12 @@ const Modal = ({children, closeModal}) => {
       evt.key === 'Escape' && closeModal();
     }
 
-    document.addEventListener('keydown', closeModalByEsc)
+    document.addEventListener('keydown', closeModalByEsc);
 
     return () => {
-      document.removeEventListener('keydown', closeModalByEsc)
+      document.removeEventListener('keydown', closeModalByEsc);
     }
-  }, [closeModal])
+  }, [closeModal]);
 
   return ReactDOM.createPortal(
     <>
@@ -31,12 +30,7 @@ const Modal = ({children, closeModal}) => {
       </div>
       <ModalOverlay onClick={closeModal}/>
     </>, container
-  )
+  );
 }
-
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  closeModal: PropTypes.func.isRequired
-};
 
 export default Modal

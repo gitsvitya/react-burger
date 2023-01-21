@@ -21,7 +21,7 @@ export const getOrderNumber = (numberOrderInfo, setOrderData) => {
         if (res.ok) {
           return res.json();
         } else {
-          return Promise.reject(`Ошибка: ${res.status}`)
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
       })
       .then((res) => {
@@ -29,15 +29,14 @@ export const getOrderNumber = (numberOrderInfo, setOrderData) => {
           dispatch({
             type: GET_ORDER_DETAILS_SUCCESS,
             payload: res.order
-          })
+          });
 
-          setOrderData(res.order.number)
+          setOrderData(res.order.number);
 
           dispatch({
             type: BURGER_CONSTRUCTOR_CLEAR
           })
-        }
-        else {
+        } else {
           return Promise.reject(`Ошибка ${res.status}`);
         }
       })

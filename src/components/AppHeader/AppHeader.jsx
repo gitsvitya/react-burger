@@ -1,6 +1,6 @@
-import React from 'react';
 import headerStyles from './AppHeader.module.css';
 import {Logo, BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import React from 'react';
 
 function AppHeader() {
   return (
@@ -21,7 +21,7 @@ function AppHeader() {
         <p className='text text_type_main-default text_color_inactive'>Личный кабинет</p>
       </button>
     </header>
-  )
+  );
 }
 
 export default AppHeader;
