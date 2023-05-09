@@ -1,0 +1,64 @@
+.section {
+  max-width: 600px;
+  width: 100%;
+  padding-top: 100px;
+  padding-right: 80px;
+}
+
+.ingredientsList {
+  padding-inline-start: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 480px;
+  list-style-type: none;
+}
+
+.ingredientsList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ingredientsList::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.ingredientsList::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.listBorder {
+  padding-left: 45px;
+  width: 100%;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+
+}
+
+.orderResultContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 41.5px;
+  justify-content: right;
+}
+
+.priceSum {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+}
+
+.bunConstructorList {
+  display: flex;
+  flex-direction: column;
+}
